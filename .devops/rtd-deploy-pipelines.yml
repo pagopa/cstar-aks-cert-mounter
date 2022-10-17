@@ -91,12 +91,12 @@ stages:
                 #   inputs:
                 #     buildType: 'current'
                 #     artifactName: 'helm'
-                #     targetPath: '$(Pipeline.Workspace)/helm/rtd'
+                #     targetPath: '$(System.DefaultWorkingDirectory)/helm/rtd'
                 - task: Bash@3
                   name: helm_dependency_build
                   displayName: Helm dependency build
                   inputs:
-                    workingDirectory: '$(Pipeline.Workspace)/helm/${{ variables.domain }}'
+                    workingDirectory: '$(System.DefaultWorkingDirectory)/helm/${{ variables.domain }}'
                     targetType: 'inline'
                     script: |
                       helm repo add cert-mounter-blueprint https://pagopa.github.io/aks-helm-cert-mounter-blueprint
@@ -109,10 +109,10 @@ stages:
                     namespace: '$(deployNamespace)'
                     command: upgrade
                     chartType: filepath
-                    chartPath: $(Pipeline.Workspace)/helm/${{ variables.domain }}
+                    chartPath: $(System.DefaultWorkingDirectory)/helm/${{ variables.domain }}
                     chartName: ${{ variables.helmReleaseName }}
                     releaseName: ${{ variables.helmReleaseName }}
-                    valueFile: "$(Pipeline.Workspace)/helm/${{ variables.domain }}/values-${{ lower(variables.environment) }}.yaml"
+                    valueFile: "$(System.DefaultWorkingDirectory)/helm/${{ variables.domain }}/values-${{ lower(variables.environment) }}.yaml"
                     install: true
                     waitForExecution: true
                     arguments: "--timeout 5m00s --debug"
