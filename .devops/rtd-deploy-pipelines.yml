@@ -12,6 +12,7 @@ parameters:
       - PROD
 
 pr: none
+trigger: none
 
 resources:
   - repo: self
