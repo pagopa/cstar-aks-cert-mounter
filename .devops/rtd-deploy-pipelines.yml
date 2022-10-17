@@ -79,6 +79,14 @@ stages:
             deploy:
               steps:
                 - checkout: self
+                - task: Bash@3
+                  name: helm_ded
+                  inputs:
+                    workingDirectory: '$(Pipeline.Workspace)'
+                    targetType: 'inline'
+                    script: |
+                      ls -la
+                    failOnStderr: true
                 # - task: DownloadPipelineArtifact@2
                 #   inputs:
                 #     buildType: 'current'
