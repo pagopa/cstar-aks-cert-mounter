@@ -23,6 +23,7 @@ variables:
   deployNamespace: '$(TF_DEPLOY_NAMESPACE)'
   domain : '$(TF_DOMAIN)'
   canDeploy: true
+  helmReleaseName: '$(TF_HELM_RELEASE_NAME)'
 
   # If the branch is develop or a feature branch starting with CEN, deploy in DEV environment
   ${{ if or(startsWith(variables['Build.SourceBranch'], 'refs/heads/release-dev'), eq(parameters.ENV, 'DEV')) }}:
