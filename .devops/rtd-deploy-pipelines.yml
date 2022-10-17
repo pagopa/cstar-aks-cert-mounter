@@ -82,7 +82,7 @@ stages:
                 - task: Bash@3
                   name: helm_ded
                   inputs:
-                    workingDirectory: '$(Pipeline.Workspace)'
+                    workingDirectory: '$(System.DefaultWorkingDirectory)'
                     targetType: 'inline'
                     script: |
                       ls -la
