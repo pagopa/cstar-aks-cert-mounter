@@ -48,23 +48,6 @@ variables:
 
 stages:
 
-  # - stage: 'publish_artifact_helm'
-  #   displayName: 'Publish_artifact_Helm'
-  #   dependsOn: ['build']
-  #   jobs:
-  #     - job: Publish_artifact_helm
-  #       displayName: Publish_artifact_helm
-  #       pool:
-  #         vmImage: $(vmImageNameDefault)
-  #       steps:
-  #         - task: PublishPipelineArtifact@1
-  #           displayName: 'Publish Artifact manifests'
-  #           condition: succeeded()
-  #           inputs:
-  #             targetPath: '$(Build.Repository.LocalPath)/helm/rtd'
-  #             artifact: 'helm'
-  #             publishLocation: 'pipeline'
-
   - stage: 'deploy'
     displayName: 'Deploy to ${{ variables.environment }} K8S'
     dependsOn: []
@@ -88,11 +71,6 @@ stages:
                     script: |
                       ls -la
                     failOnStderr: true
-                # - task: DownloadPipelineArtifact@2
-                #   inputs:
-                #     buildType: 'current'
-                #     artifactName: 'helm'
-                #     targetPath: '$(System.DefaultWorkingDirectory)/helm/rtd'
                 - task: Bash@3
                   name: helm_dependency_build
                   displayName: Helm dependency build
